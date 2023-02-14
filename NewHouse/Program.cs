@@ -14,12 +14,17 @@ namespace NewHouse
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<NewHouseDbContext>(options =>
                 options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<NewHouseDbContext>();
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                //.AddRoleStore<IdentityRole>()
+                .AddEntityFrameworkStores<NewHouseDbContext>()
+                .AddDefaultTokenProviders();
+
+
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
