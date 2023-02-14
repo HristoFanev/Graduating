@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NewHouse.Data
 {
-    public class NewHouseDbContext : IdentityDbContext
+    public class NewHouseDbContext : IdentityDbContext<User>
     {
         public NewHouseDbContext(DbContextOptions<NewHouseDbContext> options)
             : base(options)
