@@ -25,6 +25,8 @@ namespace NewHouse
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
