@@ -5,6 +5,7 @@
     {
         public int Id { get; set; }
         public int Floor { get; set; }
+        public string ImageUrl { get; set; }
         public double Quadrature { get; set; }
         public StatusType Status { get; set; }
         public string Address { get; set; }

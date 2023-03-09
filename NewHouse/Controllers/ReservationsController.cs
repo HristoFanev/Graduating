@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,12 @@ namespace NewHouse.Controllers
     public class ReservationsController : Controller
     {
         private readonly NewHouseDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ReservationsController(NewHouseDbContext context)
+        public ReservationsController(NewHouseDbContext context,UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Reservations
@@ -46,10 +49,20 @@ namespace NewHouse.Controllers
         }
 
         // GET: Reservations/Create
-        public IActionResult Create()
+        public IActionResult Create(int? propertyId)
         {
-            ViewData["PropertyId"] = new SelectList(_context.Properties, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            if (propertyId != null)
+            {
+
+                Reservation reservation = new Reservation();
+                reservation.PropertyId = (int)propertyId;
+                //reservation.UserId = _userManager.GetUserId(User);
+                //ViewData["PropertyId"] = id;
+                return View(reservation);
+            }
+
+            ViewData["PropertyId"] = new SelectList(_context.Properties, "Id", "ImageUrl");
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -58,10 +71,12 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Period,RegisterOn,PropertyId,UserId")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("Period,PropertyId")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
+                reservation.RegisterOn = DateTime.Now;
+                reservation.UserId = _userManager.GetUserId(User);
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +109,7 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Period,RegisterOn,PropertyId,UserId")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Period,PropertyId,UserId")] Reservation reservation)
         {
             if (id != reservation.Id)
             {
@@ -105,6 +120,7 @@ namespace NewHouse.Controllers
             {
                 try
                 {
+                    reservation.RegisterOn = DateTime.Now;
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
                 }

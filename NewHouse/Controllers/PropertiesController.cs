@@ -57,7 +57,7 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Floor,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
+        public async Task<IActionResult> Create([Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Floor,Quadrature,Status,Address,Description,Price,RegisterOn,TypeId")] Property @property)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
         {
             if (id != @property.Id)
             {
@@ -103,6 +103,7 @@ namespace NewHouse.Controllers
             {
                 try
                 {
+                    property.RegisterOn = DateTime.Now;
                     _context.Update(@property);
                     await _context.SaveChangesAsync();
                 }
