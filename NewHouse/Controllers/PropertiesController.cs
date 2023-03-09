@@ -57,10 +57,11 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Floor,Quadrature,Status,Address,Description,Price,RegisterOn,TypeId")] Property @property)
+        public async Task<IActionResult> Create([Bind("Id,Floor,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
         {
             if (ModelState.IsValid)
             {
+                property.RegisterOn = DateTime.Now;
                 _context.Add(@property);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

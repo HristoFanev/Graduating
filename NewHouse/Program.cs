@@ -18,7 +18,6 @@ namespace NewHouse
 
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
-                //.AddRoleStore<IdentityRole>()
                 .AddEntityFrameworkStores<NewHouseDbContext>()
                 .AddDefaultTokenProviders();
 
