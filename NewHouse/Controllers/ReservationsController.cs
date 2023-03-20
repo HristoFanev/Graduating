@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ using NewHouse.Data;
 
 namespace NewHouse.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly NewHouseDbContext _context;
@@ -24,8 +26,19 @@ namespace NewHouse.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            var newHouseDbContext = _context.Reservations.Include(r => r.Properties).Include(r => r.Users);
-            return View(await newHouseDbContext.ToListAsync());
+            if (User.IsInRole("Admin"))
+            {
+                var newHouseDbContext = _context.Reservations.Include(r => r.Properties).Include(r => r.Users);
+                return View(await newHouseDbContext.ToListAsync());
+            }
+            else
+            {
+                var newHouseDbContext = _context.Reservations
+                    .Include(r => r.Properties)
+                    .Include(r => r.Users)
+                    .Where(r => r.UserId == _userManager.GetUserId(User));
+                return View(await newHouseDbContext.ToListAsync());
+            }
         }
 
         // GET: Reservations/Details/5

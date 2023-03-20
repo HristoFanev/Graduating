@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using NewHouse.Data;
 
 namespace NewHouse.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CategoriesController : Controller
     {
         private readonly NewHouseDbContext _context;
@@ -47,7 +49,7 @@ namespace NewHouse.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id");
+            ViewData["TypeId"] = new SelectList(_context.Types, "TypeName", "TypeName");
             return View();
         }
 
@@ -64,7 +66,7 @@ namespace NewHouse.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id", category.TypeId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "TypeName", category.TypeId);
             return View(category);
         }
 
@@ -81,7 +83,7 @@ namespace NewHouse.Controllers
             {
                 return NotFound();
             }
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id", category.TypeId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "TypeName", category.TypeId);
             return View(category);
         }
 
@@ -117,7 +119,7 @@ namespace NewHouse.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id", category.TypeId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "TypeName", category.TypeId);
             return View(category);
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,9 +47,10 @@ namespace NewHouse.Controllers
         }
 
         // GET: Properties/Create
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id");
+            ViewData["TypeId"] = new SelectList(_context.Types, "TypeName", "TypeName");
             return View();
         }
 
@@ -57,6 +59,7 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Create([Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
         {
             if (ModelState.IsValid)
@@ -66,7 +69,7 @@ namespace NewHouse.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id", @property.TypeId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "TypeName", @property.TypeId);
             return View(@property);
         }
 
@@ -83,7 +86,7 @@ namespace NewHouse.Controllers
             {
                 return NotFound();
             }
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id", @property.TypeId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "TypeName", "TypeName", @property.TypeId);
             return View(@property);
         }
 
@@ -120,7 +123,7 @@ namespace NewHouse.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "Id", @property.TypeId);
+            ViewData["TypeId"] = new SelectList(_context.Types, "Id", "TypeName", @property.TypeId);
             return View(@property);
         }
 
