@@ -1,84 +1,85 @@
-﻿@model IEnumerable<NewHouse.Data.Property>
+﻿@using Microsoft.AspNetCore.Identity
+@using NewHouse.Data
+@model IEnumerable<NewHouse.Data.Property>
 
 @{
     ViewData["Title"] = "Index";
 }
+@inject UserManager<User> userManager;
+@inject SignInManager<User> signInManager;
+<h1>Properties</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Floor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quadrature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegisterOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Floor)
-            </td>
-            <td>
-                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="100"/>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quadrature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegisterOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type.TypeName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>
-            </td>
-        </tr>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 }
-    </tbody>
-</table>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="100"/>
+                <div class="card-body">
+
+                    @Html.DisplayNameFor(model => model.Floor) :
+                    @Html.DisplayFor(modelItem => item.Floor)
+                    <br>
+                    @Html.DisplayNameFor(model => model.Quadrature) :
+                    @Html.DisplayFor(modelItem => item.Quadrature)
+                    <br>
+                    @Html.DisplayNameFor(model => model.Status) :
+                    @Html.DisplayFor(modelItem => item.Status)
+                    <br>
+                    @Html.DisplayNameFor(model => model.Address) :
+                    @Html.DisplayFor(modelItem => item.Address)
+                    <br>
+                    @Html.DisplayNameFor(model => model.Description) :
+                    @Html.DisplayFor(modelItem => item.Description)
+                    <br>
+                    @Html.DisplayNameFor(model => model.Price) :
+                    @Html.DisplayFor(modelItem => item.Price)
+                    <br>
+                    @Html.DisplayNameFor(model => model.RegisterOn) :
+                    @Html.DisplayFor(modelItem => item.RegisterOn)
+                    <br>
+                    @Html.DisplayNameFor(model => model.Type.TypeName) :
+                    @Html.DisplayFor(modelItem => item.Type.TypeName)
+                    <br>
+                        <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <br>
+                        <br>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div style="display:flex; align-items:flex-end; align-content:flex-end; align-self:flex-end; padding-left:50%;">
+                            <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        
+                        <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; margin-top:20px;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>
+                        </div>
+                        }
+                        else
+                        {
+                            <div style="display:flex; align-items:flex-end; align-content:flex-end; align-self:flex-end; padding-left:65%;">
+
+                                @* <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; margin-top:20px;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>
+                            </div>
+                        }
+                            
+                        
+                    }
+                   @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                   @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
