@@ -49,9 +49,10 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
+            <h3>Get in the house today</h3>
+            <hr />  
+            <img src="~/register-pic.jpg" style="width:500px;"/>
+            @*@{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
@@ -74,7 +75,7 @@
                         </div>
                     </form>
                 }
-            }
+            }*@
         </section>
     </div>
 </div>
