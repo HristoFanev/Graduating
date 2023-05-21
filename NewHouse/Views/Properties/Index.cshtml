@@ -3,16 +3,16 @@
 @model IEnumerable<NewHouse.Data.Property>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Жилища под наем";
 }
 @inject UserManager<User> userManager;
 @inject SignInManager<User> signInManager;
-<h1>Properties</h1>
+<h1>Жилища под наем</h1>
 
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Добави жилище</a>
     </p>
 }
 
@@ -24,45 +24,46 @@
                 <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="100" height="200"/>
                 <div class="card-body" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);">
 
-                    @Html.DisplayNameFor(model => model.Floor) :
+                   @* @Html.DisplayNameFor(model => model.Floor) :*@
+                   Етаж :
                     @Html.DisplayFor(modelItem => item.Floor)
                     <br>
-                    @Html.DisplayNameFor(model => model.Quadrature) :
+                    @*@Html.DisplayNameFor(model => model.Quadrature)*@ Квадратура :
                     @Html.DisplayFor(modelItem => item.Quadrature)
                     <br>
-                    @Html.DisplayNameFor(model => model.Status) :
+                    @*@Html.DisplayNameFor(model => model.Status)*@ Статус :
                     @Html.DisplayFor(modelItem => item.Status)
                     <br>
-                    @Html.DisplayNameFor(model => model.Address) :
+                    @*@Html.DisplayNameFor(model => model.Address)*@ Адрес :
                     @Html.DisplayFor(modelItem => item.Address)
+                    @*<br>*@
+                   @* @Html.DisplayNameFor(model => model.Description) :
+                    @Html.DisplayFor(modelItem => item.Description)*@
                     <br>
-                    @Html.DisplayNameFor(model => model.Description) :
-                    @Html.DisplayFor(modelItem => item.Description)
-                    <br>
-                    @Html.DisplayNameFor(model => model.Price) :
+                    @*@Html.DisplayNameFor(model => model.Price)*@ Цена :
                     @Html.DisplayFor(modelItem => item.Price)
+                    @*<br>*@
+                    @*@Html.DisplayNameFor(model => model.RegisterOn) :
+                    @Html.DisplayFor(modelItem => item.RegisterOn)*@
                     <br>
-                    @Html.DisplayNameFor(model => model.RegisterOn) :
-                    @Html.DisplayFor(modelItem => item.RegisterOn)
-                    <br>
-                    @Html.DisplayNameFor(model => model.Type.TypeName) :
+                    @*@Html.DisplayNameFor(model => model.Type.TypeName)*@ Вид на имота :
                     @Html.DisplayFor(modelItem => item.Type.TypeName)
                     <br>
-                    @Html.DisplayNameFor(model => model.Type.Categories) :
+                    @*@Html.DisplayNameFor(model => model.Type.Categories)*@ Категория на имот :
                     @Html.DisplayFor(modelItem => item.Type.Categories)
                     <br>
-                    <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; background-color:mediumaquamarine;" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; background-color:mediumaquamarine;" asp-action="Details" asp-route-id="@item.Id">Подробности</a>
                         <br>
                         <br>
                     @if (signInManager.IsSignedIn(User))
                     {
                         @if (User.IsInRole("Admin"))
                         {
-                            <div style="display:flex; align-items:flex-end; align-content:flex-end; align-self:flex-end; padding-left:50%;">
-                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; background-color:mediumaquamarine;" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;background-color:mediumaquamarine;" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <div style="display:flex; align-items:flex-end; align-content:flex-end; align-self:flex-end; padding-left:30%;">
+                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; background-color:mediumaquamarine;" asp-action="Edit" asp-route-id="@item.Id">Промени</a>
+                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;background-color:mediumaquamarine;" asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
 
-                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; margin-top:20px; background-color:mediumaquamarine;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>
+                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; margin-top:20px; background-color:mediumaquamarine;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Наеми</a>
                         </div>
                         }
                         else
@@ -71,7 +72,7 @@
 
                                 @* <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; margin-top:20px;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>
+                                <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;background-color:mediumaquamarine; margin-top:20px;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Наеми</a>
                             </div>
                         }
                             

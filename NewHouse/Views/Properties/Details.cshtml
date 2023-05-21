@@ -3,79 +3,82 @@
 @model NewHouse.Data.Property
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Подробен план на жилището";
 }
 @inject UserManager<User> userManager;
 @inject SignInManager<User> signInManager;
 
-<h1>Details</h1>
+<h1>Подробен план на жилището</h1>
 
 <div>
-    <h4>Property</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dd class="col-sm-10">
+            <img src="@Html.DisplayFor(model => model.ImageUrl)" width="400" />
+        </dd>
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Floor)
-        </dt>
+        </dt>*@
+        
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Floor)
+            Етаж -  @Html.DisplayFor(model => model.Floor)
         </dd>
-        <dt class = "col-sm-2">
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="@Html.DisplayFor(model => model.ImageUrl)" width="100" />
-        </dd>
-        <dt class = "col-sm-2">
+        </dt>*@
+       
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Quadrature)
-        </dt>
+        </dt>*@
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quadrature)
+            @Html.DisplayFor(model => model.Quadrature) квадратни метри
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
-        </dt>
+        </dt>*@
+        
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
+            Статус: @Html.DisplayFor(model => model.Status)
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Address)
-        </dt>
+        </dt>*@
+        
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
+            Адрес - @Html.DisplayFor(model => model.Address)
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        </dt>*@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
-        </dt>
+        </dt>*@
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Price) лв./мес.
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RegisterOn)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RegisterOn)
-        </dd>
-        <dt class = "col-sm-2">
+        </dd>*@
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd class = "col-sm-10">
+        </dt>*@
+       @* <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Type.TypeName)
-        </dd>
+        </dd>*@
     </dl>
 </div>
 <div>
     
         @if (User.IsInRole("Admin"))
         {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Промени</a>
         }@*
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |*@
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад</a>
 </div>

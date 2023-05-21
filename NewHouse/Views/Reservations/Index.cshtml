@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<NewHouse.Data.Reservation>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Резервации";
 }
 
-<h1>Index</h1>
+<h1>Резервации</h1>
 
 @*<p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Period)
+                @*@Html.DisplayNameFor(model => model.Period)*@
+                Наето време
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RegisterOn)
+                @*@Html.DisplayNameFor(model => model.RegisterOn)*@
+                Дата на наемане
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Properties)
+                @*@Html.DisplayNameFor(model => model.Properties)*@
+                Номер на жилището
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Users)
+                @*@Html.DisplayNameFor(model => model.Users)*@
+                Клиент
             </th>
             <th></th>
         </tr>
@@ -45,9 +49,9 @@
             <td>
                     @if (User.IsInRole("Admin"))
                     {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Промени</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Подробности</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
                     }
 
                 @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
