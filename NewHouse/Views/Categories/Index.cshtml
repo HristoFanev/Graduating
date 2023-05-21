@@ -1,22 +1,24 @@
 ﻿@model IEnumerable<NewHouse.Data.Category>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Категории";
 }
 
-<h1>Index</h1>
+<h1>Категории</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добави категория</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
+                @*@Html.DisplayNameFor(model => model.CategoryName)*@
+                Категория
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Types)
+               @* @Html.DisplayNameFor(model => model.Types)*@
+               Вид
             </th>
             <th></th>
         </tr>
@@ -31,9 +33,9 @@
                 @Html.DisplayFor(modelItem => item.Types.TypeName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Промени</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробности</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
             </td>
         </tr>
 }

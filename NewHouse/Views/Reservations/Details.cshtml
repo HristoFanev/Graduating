@@ -1,35 +1,39 @@
 ﻿@model NewHouse.Data.Reservation
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Подробности";
 }
 
-<h1>Details</h1>
+<h1>Подробности</h1>
 
 <div>
-    <h4>Reservation</h4>
+    <h4>Резерваций</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Period)
+           @* @Html.DisplayNameFor(model => model.Period)*@
+           Време за наемане
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Period)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegisterOn)
+           @* @Html.DisplayNameFor(model => model.RegisterOn)*@
+           Дата на наем
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RegisterOn)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Properties)
+            @*@Html.DisplayNameFor(model => model.Properties)*@
+            Номер на жилище
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Properties.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Users)
+           @* @Html.DisplayNameFor(model => model.Users)*@
+           Клиент
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Users.Id)
@@ -37,6 +41,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Промени</a> |
+    <a asp-action="Index">Назад</a>
 </div>
