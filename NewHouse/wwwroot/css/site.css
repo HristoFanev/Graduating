@@ -19,6 +19,7 @@ body {
     /*background-size: 100% 100%;*/
     background: rgb(15,66,88);
     background: linear-gradient(6deg, rgba(15,66,88,1) 0%, rgba(9,103,107,1) 49%, rgba(13,77,83,1) 100%);
+    color:aqua;
 }
 nav{
     background-color:red;
