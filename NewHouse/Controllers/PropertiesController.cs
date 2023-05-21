@@ -51,6 +51,7 @@ namespace NewHouse.Controllers
         public IActionResult Create()
         {
             ViewData["TypeId"] = new SelectList(_context.Types, "TypeName", "TypeName");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryName", "CategoryName");
             return View();
         }
 
@@ -60,7 +61,7 @@ namespace NewHouse.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
+        public async Task<IActionResult> Create([Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId,Type")] Property @property)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +71,7 @@ namespace NewHouse.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TypeId"] = new SelectList(_context.Types, "Id", "TypeName", @property.TypeId);
+            //ViewData["Type"] = new SelectList(_context.Categories, "Id", "CategoryName", @property.Type.Categories);
             return View(@property);
         }
 
@@ -87,6 +89,7 @@ namespace NewHouse.Controllers
                 return NotFound();
             }
             ViewData["TypeId"] = new SelectList(_context.Types, "TypeName", "TypeName", @property.TypeId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryName", "CategoryName");
             return View(@property);
         }
 
@@ -95,7 +98,7 @@ namespace NewHouse.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId")] Property @property)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Floor,ImageUrl,Quadrature,Status,Address,Description,Price,TypeId,Type")] Property @property)
         {
             if (id != @property.Id)
             {
@@ -167,7 +170,7 @@ namespace NewHouse.Controllers
 
         private bool PropertyExists(int id)
         {
-          return _context.Properties.Any(e => e.Id == id);
+          return (_context.Properties?.Any(e => e.Id == id)).GetValueOrDefault(); 
         }
     }
 }

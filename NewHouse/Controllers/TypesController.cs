@@ -14,7 +14,7 @@ namespace NewHouse.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class TypesController : Controller
-    {
+    {   
         private readonly NewHouseDbContext _context;
 
         public TypesController(NewHouseDbContext context)
@@ -158,7 +158,7 @@ namespace NewHouse.Controllers
 
         private bool TypeExists(int id)
         {
-          return _context.Types.Any(e => e.Id == id);
+          return (_context.Types?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

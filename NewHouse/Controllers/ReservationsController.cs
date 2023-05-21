@@ -62,7 +62,7 @@ namespace NewHouse.Controllers
         }
 
         // GET: Reservations/Create
-        public IActionResult Create(int? propertyId)
+        public IActionResult Create(int? propertyId)    
         {
             if (propertyId != null)
             {

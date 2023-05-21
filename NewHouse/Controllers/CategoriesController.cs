@@ -10,7 +10,7 @@ using NewHouse.Data;
 
 namespace NewHouse.Controllers
 {
-    [Authorize(Roles ="Admin")]
+        
     public class CategoriesController : Controller
     {
         private readonly NewHouseDbContext _context;
@@ -134,7 +134,7 @@ namespace NewHouse.Controllers
             var category = await _context.Categories
                 .Include(c => c.Types)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            if (category == null)   
             {
                 return NotFound();
             }
@@ -163,7 +163,7 @@ namespace NewHouse.Controllers
 
         private bool CategoryExists(int id)
         {
-          return _context.Categories.Any(e => e.Id == id);
+          return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
