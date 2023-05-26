@@ -9,13 +9,7 @@
 @inject SignInManager<User> signInManager;
 <h1>Жилища под наем</h1>
 
-@*<form asp-action="Index" method="get">
-    <div class="form-group">
-        <label for="SearchString">Search by partial title</label>
-        <input type="text" name="SearchString" value="@ViewData[" CurrentFilter"]" />
-        <input type="submit" value="Search" class="btn btn-primary"/>
-    </div>
-</form>*@
+
 
 @if (User.IsInRole("Admin"))
 {
@@ -79,17 +73,14 @@
                         {
                             <div style="display:flex; align-items:flex-end; align-content:flex-end; align-self:flex-end; padding-left:65%;">
 
-                                @* <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;" asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                               
                                 <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;background-color:mediumaquamarine; margin-top:20px;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Наеми</a>
                             </div>
                         }
                             
                         
                     }
-                   @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
-                   @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                    <a asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>*@
+                 
                 </div>
             </div>
         </div>

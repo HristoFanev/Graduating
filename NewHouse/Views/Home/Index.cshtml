@@ -38,29 +38,9 @@
   background: #ccc;
 }
 
-/*media screen and (max-width: 600px) {
-  .topnav .search-container {
-    float: none;
-  }
-  .topnav a, .topnav input[type=text], .topnav .search-container button {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;  
-  }
-}*/
+ 
 </style>
-@*<script>
-    //function Func(){
-    //    location.href='Properties';
-    //}
-  
-</script>*@
+
 <script src="~/js/site.js" asp-append-version="true"></script>
 
 <div class="text-center">
@@ -68,50 +48,7 @@
     <h1 class="display-4" style="color:aquamarine; font-family:Garamond"><i>Недвижими имоти<br /> New House</i></h1>
 </div>
 
-@*<form name="search" method="post" action="imot.cgi" style="margin: 0px; padding: 0px; align-self:cente">
-<input type="hidden" name="act" value="2">
-<input type="hidden" name="rub" value="3">
-<input type="hidden" name="topmenu" value="2">
-<input type="hidden" name="actions" value="1">
-<input type="hidden" name="f0" value="62.176.118.150">
-<input type="hidden" name="f1" value="1">
-<input type="hidden" name="f4" value="1">
-<table width="980" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px; margin-bottom:10px; border:#900 1px solid; border-top:#900 3px solid;">
-        <tbody>
-            <tr>
-        <td width="300" valign="top" style="padding-top:20px; padding-bottom:20px;">
-            Вид имот:
-            <select class="sw200" name="f3">
-                &nbsp;
-                <option selected="" value="0">
-                </option>
-                <option value="1">
-                    Апартамент
-                </option>
-                <option value="2">
-                    Къща
-                </option>
-                <option value="3">
-                    Офис
-                </option>
-            </select>
-        </td>
-        <td width="300" align="right" valign="top" style="padding-top:20px; padding-bottom:20px; padding-left:10px; padding-right:10px;">
-                    <input type="button" value="Т Ъ Р С И" style="width:260px; height:40px; font-weight:bold;" onclick="Func()">
-        </td>
-        </tr>
-        </tbody>
-    </table>
-</form>*@
-
-@*<div class="topnav">
-    <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search" id="search-item">
-            <input type="button" value="Search" onclick="Search()" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);">
-        </form>
-    </div>
-</div>*@
+ 
 <div class="text-center">
 <form asp-controller="Properties" asp-action="Index1" method="get">
     <div class="form-group">
