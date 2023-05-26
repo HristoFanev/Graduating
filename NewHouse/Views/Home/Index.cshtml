@@ -55,11 +55,13 @@
   }
 }*/
 </style>
-<script>
-    function Func(){
-        location.href='Properties';
-    }
-</script>
+@*<script>
+    //function Func(){
+    //    location.href='Properties';
+    //}
+  
+</script>*@
+<script src="~/js/site.js" asp-append-version="true"></script>
 
 <div class="text-center">
     <br /><br /><br /><br /><br /><br />
@@ -102,11 +104,20 @@
     </table>
 </form>*@
 
-<div class="topnav">
+@*<div class="topnav">
     <div class="search-container">
         <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <input type="button" value="Search" onclick="Func()" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);">
+            <input type="text" placeholder="Search.." name="search" id="search-item">
+            <input type="button" value="Search" onclick="Search()" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);">
         </form>
     </div>
+</div>*@
+<div class="text-center">
+<form asp-controller="Properties" asp-action="Index1" method="get">
+    <div class="form-group">
+            <label for="SearchString" style="color:aquamarine; font-family:Garamond; font-style:italic; font-size:20px;">Вид жилище:</label>
+            <input type="text" name="SearchString" value="@ViewData[" CurrentFilter"]" placeholder="Search.." />
+            <input type="submit" value="Search" class="btn btn-primary" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); color:black;" />
+    </div>
+    </form>
 </div>

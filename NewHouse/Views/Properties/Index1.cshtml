@@ -30,11 +30,11 @@
     {
         <div class="col-sm-3">
             <div class="card" style="width: 18rem;margin-bottom:50px;" id="search-div">
-                <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="100" height="200"/>
+                <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="100" height="200" />
                 <div class="card-body" id="search-it" style="background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);">
 
-                   @* @Html.DisplayNameFor(model => model.Floor) :*@
-                   Етаж :
+                    @* @Html.DisplayNameFor(model => model.Floor) :*@
+                    Етаж :
                     @Html.DisplayFor(modelItem => item.Floor)
                     <br>
                     @*@Html.DisplayNameFor(model => model.Quadrature)*@ Квадратура :
@@ -46,24 +46,23 @@
                     @*@Html.DisplayNameFor(model => model.Address)*@ Адрес :
                     @Html.DisplayFor(modelItem => item.Address)
                     @*<br>*@
-                   @* @Html.DisplayNameFor(model => model.Description) :
-                    @Html.DisplayFor(modelItem => item.Description)*@
+                    @* @Html.DisplayNameFor(model => model.Description) :
+                @Html.DisplayFor(modelItem => item.Description)*@
                     <br>
                     @*@Html.DisplayNameFor(model => model.Price)*@ Цена :
                     @Html.DisplayFor(modelItem => item.Price)
                     @*<br>*@
                     @*@Html.DisplayNameFor(model => model.RegisterOn) :
-                    @Html.DisplayFor(modelItem => item.RegisterOn)*@
+                @Html.DisplayFor(modelItem => item.RegisterOn)*@
                     <br>
-                    @*@Html.DisplayNameFor(model => model.Type.TypeName)*@ Вид на имота :
-                    @Html.DisplayFor(modelItem => item.Type.TypeName)
-                    <br>
+                    @*@Html.DisplayNameFor(model => model.Type.TypeName)*@@* Вид на имота :
+                    @Html.DisplayFor(modelItem => item.Type.TypeName)*@
                     @*@Html.DisplayNameFor(model => model.Type.Categories)*@ Категория на имот :
                     @Html.DisplayFor(modelItem => item.Type.Categories)
                     <br>
                     <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; background-color:mediumaquamarine;" asp-action="Details" asp-route-id="@item.Id">Подробности</a>
-                        <br>
-                        <br>
+                    <br>
+                    <br>
                     @if (signInManager.IsSignedIn(User))
                     {
                         @if (User.IsInRole("Admin"))
@@ -73,7 +72,7 @@
                                 <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;background-color:mediumaquamarine;" asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
 
                                 <a style="text-decoration:none; border:1px solid black; color: black; padding:2px; margin-top:20px; background-color:mediumaquamarine;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Наеми</a>
-                        </div>
+                            </div>
                         }
                         else
                         {
@@ -84,12 +83,12 @@
                                 <a style="text-decoration:none; border:1px solid black; color: black; padding:2px;background-color:mediumaquamarine; margin-top:20px;" asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Наеми</a>
                             </div>
                         }
-                            
-                        
+
+
                     }
-                   @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
-                   @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                    <a asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>*@
+                    @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                    @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="Reservations" asp-action="Create" asp-route-propertyId="@item.Id">Reserve</a>*@
                 </div>
             </div>
         </div>

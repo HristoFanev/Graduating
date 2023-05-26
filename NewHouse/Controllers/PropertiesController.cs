@@ -25,7 +25,20 @@ namespace NewHouse.Controllers
         {
             var newHouseDbContext = _context.Properties.Include(p => p.Type);
             return View(await newHouseDbContext.ToListAsync());
+
         }
+        public async Task<IActionResult> Index1(string SearchString)
+        {
+            ViewData["CurrentFilter"] = SearchString;
+            var prop = from p in _context.Properties select p;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                prop = prop.Where(p => p.Type.TypeName.Contains(SearchString));
+            } 
+            return View(prop);
+           
+        }
+        
 
         // GET: Properties/Details/5
         public async Task<IActionResult> Details(int? id)
